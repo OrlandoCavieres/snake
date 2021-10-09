@@ -78,10 +78,27 @@ def show_score(choice, color, font, size):
         score_rect.midtop = (frame_size_x/2, frame_size_y/1.25)
     game_window.blit(score_surface, score_rect)
     # pygame.display.flip()
-    
+
+
+def win_game():
+    my_font = pygame.font.SysFont('times new roman', 82)
+    win_surface = my_font.render('¡¡HAS GANADO!!', True, green)
+    win_rect = win_surface.get_rect()
+    win_rect.midtop = (frame_size_x / 2, frame_size_y / 4)
+    game_window.fill(black)
+    game_window.blit(win_surface, win_rect)
+    show_score(0, white, 'consolas', 20)
+    pygame.display.flip()
+    time.sleep(3)
+    pygame.quit()
+    sys.exit()
+
 
 # Main logic
 while True:
+    if score == 10:
+        win_game()
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
