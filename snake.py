@@ -66,7 +66,11 @@ def game_over():
     game_window.fill(black)
     game_window.blit(game_over_surface, game_over_rect)
     show_score(0, red, 'consolas', 20)
-    pygame.display.flip()
+    play_again_font = pygame.font.SysFont('times new roman', 20)
+    play_again_surface = play_again_font.render('Presione c para jugar de nuevo o q para salir', True, red)
+    play_again_rect = play_again_surface.get_rect()
+    play_again_rect.midtop = (frame_size_x / 2, frame_size_y / 1.5)
+    game_window.blit(play_again_surface, play_again_rect)
     
 
 # Reset base variables
