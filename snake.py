@@ -68,7 +68,19 @@ def game_over():
     show_score(0, red, 'consolas', 20)
     pygame.display.flip()
     
-    
+
+# Reset base variables
+def reset():
+    global change_to, direction, food_pos, food_spawn, score, snake_body, snake_pos
+    snake_pos = [100, 50]
+    snake_body = [[100, 50], [100 - 10, 50], [100 - (2 * 10), 50]]
+    food_pos = [random.randrange(1, (frame_size_x // 10)) * 10, random.randrange(1, (frame_size_y // 10)) * 10]
+    food_spawn = True
+    direction = 'RIGHT'
+    change_to = direction
+    score = 0
+
+
 # Score
 def show_score(choice, color, font, size):
     score_font = pygame.font.SysFont(font, size)
@@ -104,6 +116,7 @@ def main():
                 # Q -> quit ; C -> play again
                 if event.key == ord('c') and is_game_over:
                     is_game_over = False
+                    reset()
                     main()
                 if event.key == ord('q') and is_game_over:
                     is_game_over = False
