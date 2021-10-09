@@ -53,7 +53,12 @@ change_to = direction
 score = 0
 
 # Game Over
+is_game_over = False
+
+
 def game_over():
+    global is_game_over
+    is_game_over = True
     my_font = pygame.font.SysFont('times new roman', 90)
     game_over_surface = my_font.render('GAME OVER', True, red)
     game_over_rect = game_over_surface.get_rect()
@@ -79,7 +84,7 @@ def show_score(choice, color, font, size):
 
 # Main logic
 def main():
-    global change_to, direction, food_pos, food_spawn, score
+    global change_to, direction, food_pos, food_spawn, is_game_over, score, snake_body, snake_pos
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -97,9 +102,11 @@ def main():
                 if event.key == pygame.K_RIGHT or event.key == ord('d'):
                     change_to = 'RIGHT'
                 # Q -> quit ; C -> play again
-                if event.key == ord('c'):
+                if event.key == ord('c') and is_game_over:
+                    is_game_over = False
                     main()
-                if event.key == ord('q'):
+                if event.key == ord('q') and is_game_over:
+                    is_game_over = False
                     pygame.quit()
                     sys.exit()
                 # Esc -> Create event to quit the game
